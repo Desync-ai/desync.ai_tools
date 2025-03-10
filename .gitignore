@@ -1,0 +1,27 @@
+# Ignore environment variables file
+.env
+
+# Ignore Python cache directories
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environment directories
+venv/
+.env/
+ENV/
+env/
+.venv/
+
+# Ignore IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore test output
+*.log
