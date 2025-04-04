@@ -19,18 +19,18 @@ A modular, open-source toolkit for stealthy web data extraction, boilerplate cle
 ```
 DESYNC.AI_TOOLS/
 │
-├── basic_implementation/         # Search wrappers (crawl, bulk, stealth)
+├── basic_implementation/         # The fundamental search methods (crawl, bulk, stealth)
 ├── data_extraction/              # contact_extractor.py and related tools
 ├── examples/                     # usage examples (bulk_clean_and_save_csv.py)
 ├── output/                       # saved outputs (CSV/JSON/DB)
-├── result_cleaning/             # boilerplate removal tools
+├── result_cleaning/              # boilerplate removal tools
 ├── storage/
 │   ├── csv/                      # save_to_csv.py
 │   ├── json/                     # save_to_json.py
 │   └── sqlite/                   # save_to_sqlite.py
 │
 ├── .env                          # credentials (not committed)
-├── search_demo.ipynb            # interactive notebook demo
+├── search_demo.ipynb             # interactive notebook demo
 ├── .gitignore
 └── README.md                     # this file
 ```
