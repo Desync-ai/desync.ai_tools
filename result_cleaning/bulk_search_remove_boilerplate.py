@@ -1,5 +1,5 @@
 """
-bulk_remove_duplicate_text.py
+bulk_remove_boilerplate.py
 
 This script helps users clean their scraped web data by identifying text snippets
 that appear repeatedly across multiple pages — like navbars, footers, or repeated templates.
@@ -12,14 +12,14 @@ Author: Jackson-Ballow
 
 from desync_search import DesyncClient
 from collections import Counter
-from typing import List, Tuple
+from typing import List
 import re
 
 def bulk_and_clean(
     url_list: List[str],
     threshold: float = 0.5,
     chunk_method: str = "line"
-) -> Tuple[List[str], List]:
+) -> List:
     """
     Runs a bulk search and removes repeated text chunks (e.g., navbars/footers).
 
@@ -34,8 +34,7 @@ def bulk_and_clean(
                             - 'paragraph': splits on double newlines (longer chunks).
 
     Returns:
-        cleaned_pages (List[str]): The cleaned text content from each page.
-        pages (List[PageData]): Original Desync PageData objects (if you want metadata, links, etc.).
+        pages (List[PageData]): The original Desync PageData objects, but with .text_content cleaned.
     """
     if len(url_list) == 0 or len(url_list) > 1000:
         raise ValueError("url_list must contain between 1 and 1000 URLs.")
@@ -55,17 +54,13 @@ def bulk_and_clean(
     # Helper: split text content into chunks
     def chunk_text(text):
         if chunk_method == "paragraph":
-            # Split on double newlines; only keep longer chunks
             return [p.strip() for p in text.split("\n\n") if len(p.strip()) > 30]
         elif chunk_method == "sentence":
-            # Split on sentence-ending punctuation
             return [s.strip() for s in re.split(r'(?<=[.!?])\s+', text) if len(s.strip()) > 0]
         elif chunk_method == "line":
-            # Split on every line, keeping non-empty lines
             return [line.strip() for line in text.splitlines() if len(line.strip()) > 0]
         else:
             raise ValueError("chunk_method must be 'line', 'sentence', or 'paragraph'")
-
 
     chunk_counter = Counter()
     page_chunks = []
@@ -81,16 +76,14 @@ def bulk_and_clean(
     def is_boilerplate(chunk):
         return chunk_counter[chunk] >= threshold * len(pages)
 
-    # Remove boilerplate from each page
-    cleaned_pages = []
-    for chunks in page_chunks:
+    # Clean each page in-place
+    for page, chunks in zip(pages, page_chunks):
         filtered = [chunk for chunk in chunks if not is_boilerplate(chunk)]
-        cleaned_pages.append("\n\n".join(filtered))
+        page.text_content = "\n\n".join(filtered)
 
-    return cleaned_pages, pages
+    return pages
 
 if __name__ == "__main__":
-    # Example usage:
     urls = [
         "https://www.137ventures.com/team/koby-aliphios",
         "https://www.137ventures.com/team/sebastian-ferus",
@@ -98,18 +91,15 @@ if __name__ == "__main__":
         # Add up to 1000 URLs
     ]
 
-    # Adjust threshold/chunk_method to control how aggressively boilerplate is removed (increase threshold to remove less)
-    cleaned, original = bulk_and_clean(
+    # Increase the threshold to remove less
+    cleaned_pages = bulk_and_clean(
         url_list=urls,
         threshold=0.5,
         chunk_method="line"
     )
 
     idx = 0  # View results from the 1st URL in the list
-    print("=== ORIGINAL TEXT ===")
-    print("Length of result: ", len(original[idx].text_content))
-    print(original[idx].text_content, "\n")
-
-    print("=== CLEANED TEXT ===")
-    print("Length of result: ", len(cleaned[idx]))
-    print(cleaned[idx])
+    print("=== CLEANED PAGE ===")
+    print("URL:", cleaned_pages[idx].url)
+    print("Length of cleaned text:", len(cleaned_pages[idx].text_content))
+    print(cleaned_pages[idx].text_content)

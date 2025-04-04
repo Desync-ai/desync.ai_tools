@@ -1,5 +1,5 @@
 """
-crawl_remove_duplicate_text.py
+crawl_remove_boilerplate.py
 
 This script helps users clean their scraped web data by identifying text snippets
 that appear repeatedly across multiple pages — like navbars, footers, or repeated templates.
@@ -17,7 +17,7 @@ import re
 def crawl_and_clean(
     start_url: str,
     max_depth: int = 3,
-    threshold: float = 1.0,
+    threshold: float = 0.5,
     chunk_method: str = "line"
 ) -> list:
     """
@@ -37,8 +37,7 @@ def crawl_and_clean(
                             - 'paragraph': splits on double newlines (good for long-form blocks).
 
     Returns:
-        cleaned_pages (List[str]): The cleaned text content from each page.
-        pages (List[PageData]): Original Desync PageData objects (if you want metadata, links, etc.).
+        pages (List[PageData]): The original Desync PageData objects, but with .text_content cleaned.
     """
     client = DesyncClient()
     pages = client.crawl(
@@ -73,19 +72,15 @@ def crawl_and_clean(
     def is_boilerplate(chunk):
         return chunk_counter[chunk] >= threshold * len(pages)
 
-    # Remove boilerplate from each page
-    cleaned_pages = []
-    for chunks in page_chunks:
+    # Remove boilerplate and update .text_content in-place
+    for page, chunks in zip(pages, page_chunks):
         filtered = [chunk for chunk in chunks if not is_boilerplate(chunk)]
-        cleaned_pages.append("\n\n".join(filtered))
+        page.text_content = "\n\n".join(filtered)
 
-    return cleaned_pages, pages
+    return pages
 
 if __name__ == "__main__":
-    # Example usage:
-    # - Try lowering threshold to 0.3 for more aggressive removal
-    # - Switch to chunk_method="paragraph" or "sentence" for other use cases
-    cleaned, original = crawl_and_clean(
+    cleaned_pages = crawl_and_clean(
         "https://www.137ventures.com/team",
         threshold=0.5,
         chunk_method="line",
@@ -93,10 +88,7 @@ if __name__ == "__main__":
     )
 
     idx = 1  # Change to view a different page from the crawl
-    print("=== ORIGINAL TEXT ===")
-    print("Length of result: ", len(original[idx].text_content))
-    print(original[idx].text_content, "\n")
-
-    print("=== CLEANED TEXT ===")
-    print("Length of result: ", len(cleaned[idx]))
-    print(cleaned[idx])
+    print("=== CLEANED PAGE ===")
+    print("URL:", cleaned_pages[idx].url)
+    print("Length of cleaned text: ", len(cleaned_pages[idx].text_content))
+    print(cleaned_pages[idx].text_content)
