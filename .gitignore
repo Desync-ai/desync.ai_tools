@@ -25,3 +25,6 @@ Thumbs.db
 
 # Ignore test output
 *.log
+
+# Ignore the output directory
+output/
