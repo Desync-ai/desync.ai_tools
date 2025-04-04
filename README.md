@@ -1,6 +1,6 @@
 # Desync.AI Tools
 
-A modular, open-source toolkit for stealthy web data extraction, boilerplate cleaning, and structured output storage — powered by the `desync-search` API.
+An open-source toolkit for stealthy web data extraction, boilerplate cleaning, structured output storage, and a lot more coming soon — powered by the `desync-search` API.
 
 ---
 
@@ -9,8 +9,7 @@ A modular, open-source toolkit for stealthy web data extraction, boilerplate cle
 - **Crawling & Bulk Search**: Easily scrape websites using `DesyncClient` with optional stealth mode.
 - **Boilerplate Removal**: Clean repetitive content (like navbars and footers) from results.
 - **Structured Storage**: Export to CSV, JSON, or SQLite formats.
-- **Contact Extraction** *(WIP)*: Tools to extract LinkedIn profiles and other contact info.
-- **Extensible**: Plug your pipeline into examples, output clean structured data to `/output`.
+- **Contact Extraction** *(WIP)*: Tools to extract email, phone mumbers, LinkedIn profiles and other contact info.
 
 ---
 
@@ -22,7 +21,7 @@ DESYNC.AI_TOOLS/
 ├── basic_implementation/         # The fundamental search methods (crawl, bulk, stealth)
 ├── data_extraction/              # contact_extractor.py and related tools
 ├── examples/                     # usage examples (bulk_clean_and_save_csv.py)
-├── output/                       # saved outputs (CSV/JSON/DB)
+├── output/                       # saved outputs (CSV/JSON/DB) - not committed
 ├── result_cleaning/              # boilerplate removal tools
 ├── storage/
 │   ├── csv/                      # save_to_csv.py
