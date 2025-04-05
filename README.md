@@ -21,6 +21,7 @@ DESYNC.AI_TOOLS/
 ├── basic_implementation/         # The fundamental search methods (crawl, bulk, stealth)
 ├── data_extraction/              # contact_extractor.py and related tools
 ├── examples/                     # usage examples (bulk_clean_and_save_csv.py)
+├── parsers/                      # HTML structure extraction and parsing.
 ├── output/                       # saved outputs (CSV/JSON/DB) - not committed
 ├── result_cleaning/              # boilerplate removal tools
 ├── storage/
