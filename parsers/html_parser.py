@@ -66,6 +66,22 @@ def parse_html_blocks(html: str) -> List[Dict]:
         if img.get("src"):
             blocks.append({"type": "image", "src": img.get("src"), "alt": img.get("alt", "")})
 
+    # Extract divs that appear to be standalone paragraph blocks
+    for div in soup.find_all("div"):
+        text = div.get_text(strip=True)
+        if (
+            text
+            and len(text.split()) > 10  # long enough to matter
+            and not div.find_all()  # avoid nested containers
+        ):
+            blocks.append({
+                "type": "paragraph-div",
+                "tag": "div",
+                "class": div.get("class", []),
+                "content": text
+            })
+
+
     return blocks
 
 

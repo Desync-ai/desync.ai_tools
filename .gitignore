@@ -28,3 +28,4 @@ Thumbs.db
 
 # Ignore the output directory
 output/
+outputs/
