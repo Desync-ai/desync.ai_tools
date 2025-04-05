@@ -19,11 +19,12 @@ import sys
 import os
 
 # Add relevant directories to path
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "result_cleaning"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "result_cleaning", "text_content_cleaning"))
 sys.path.append(os.path.join(os.path.dirname(__file__), "..", "storage", "csv"))
 
-from bulk_search_remove_boilerplate import bulk_and_clean
+from remove_boilerplate_text import remove_boilerplate_text
 from csv_storage import save_to_csv
+from desync_search import DesyncClient
 
 urls = [
     "https://www.137ventures.com/team/koby-aliphios",
@@ -49,11 +50,25 @@ urls = [
 
 
 if __name__ == "__main__":
-    # Step 1 & 2: Run bulk search and remove boilerplate
-    cleaned_pages = bulk_and_clean(urls, threshold=0.5, chunk_method="line")
+    # Initialize DesyncClient
+    client = DesyncClient()
+
+    # Step 1: Perform a bulk search
+    bulk_info = client.bulk_search(target_list=urls, extract_html=False)
+
+    pages = client.collect_results(
+        bulk_search_id=bulk_info["bulk_search_id"],
+        target_links=urls,
+        wait_time=30.0,
+        poll_interval=2.0,
+        completion_fraction=0.975,
+    )
+
+    # Step 2: Remove the boilerplate text
+    remove_boilerplate_text(pages, threshold=0.5, chunk_method="line")
 
     # Step 3: Save cleaned results to CSV
     output_path = "output/bulk_cleaned_output.csv"
-    save_to_csv(cleaned_pages, output_path, mode="w")
+    save_to_csv(pages, output_path, mode="w")
 
     print(f"✅ Saved cleaned bulk search results to {output_path}")
