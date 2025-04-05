@@ -44,7 +44,7 @@ DESYNC.AI_TOOLS/
 1. **Install dependencies** (via pip/venv)
 
 ```bash
-pip install desync-search
+pip install desync_search
 ```
 
 2. **Set your credentials** in `.env`:
