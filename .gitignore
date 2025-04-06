@@ -33,6 +33,6 @@ outputs/
 examples/train_and_run_transformer.py
 
 # Model stuff
-137_team_meta.jsonl
-137_team.faiss
-/examples/rag_137_team.py
+vc_teams_meta.jsonl
+vc_teams.faiss
+/examples/rag_vc_teams.py
