@@ -15,6 +15,13 @@ from typing import List, Literal
 
 from desync_search.data_structures import PageData
 
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", "parsers"))
+
+from html_parser import parse_html_blocks
+
 
 def chunk_text_blocks(
     pages: List[PageData],
@@ -76,9 +83,7 @@ if __name__ == "__main__":
 
     # Fix path so we can import from sibling directories
     sys.path.append(os.path.join(os.path.dirname(__file__), "..", "parsers"))
-    sys.path.append(os.path.join(os.path.dirname(__file__), "..", "result_cleaning", "html_cleaning"))
 
-    from html_parser import parse_html_blocks
     from remove_boilerplate_html import remove_boilerplate_html
 
     from desync_search import DesyncClient
@@ -88,11 +93,11 @@ if __name__ == "__main__":
         "https://www.137ventures.com/team/sarah-mitchell"
     ]
 
-    print("🚀 Starting bulk search...")
+    print("Starting bulk search...")
     client = DesyncClient()
     bulk_info = client.bulk_search(target_list=urls, extract_html=True)
 
-    print("⏳ Collecting results...")
+    print("Collecting results...")
     pages = client.collect_results(
         bulk_search_id=bulk_info["bulk_search_id"],
         target_links=urls,
@@ -102,24 +107,24 @@ if __name__ == "__main__":
     )
 
     if not pages:
-        print("❌ No results returned.")
+        print("No results returned.")
         exit()
 
-    print(f"✅ Retrieved {len(pages)} pages. Cleaning HTML...")
+    print(f"Retrieved {len(pages)} pages. Cleaning HTML...")
     remove_boilerplate_html(pages)
 
-    print("🔍 Checking HTML content after cleaning...")
+    print("Checking HTML content after cleaning...")
     for page in pages:
         print(f"\n--- {page.url} ---")
         print(f"HTML length: {len(page.html_content or '')}")
         if page.html_content:
             print("Preview:", page.html_content[:500])
         else:
-            print("❌ No HTML content")
+            print("No HTML content")
 
-    print("\n🧠 Chunking cleaned HTML into blocks...")
+    print("\nChunking cleaned HTML into blocks...")
     chunks = chunk_text_blocks(pages, method="paragraph", max_tokens=100)
 
-    print(f"\n📦 Generated {len(chunks)} chunks. Sample output:\n")
+    print(f"\nGenerated {len(chunks)} chunks. Sample output:\n")
     for chunk in chunks[:3]:
         print(f"- {chunk['chunk_id']} ({len(chunk['text'].split())} words)\n  {chunk['text']}\n")

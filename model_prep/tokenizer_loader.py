@@ -69,7 +69,7 @@ if __name__ == "__main__":
     import sys
     import os
 
-    # 🧼 Fix import paths for local tools
+    # Fix import paths for local tools
     sys.path.append(os.path.join(os.path.dirname(__file__), "..", "result_cleaning", "html_cleaning"))
     sys.path.append(os.path.join(os.path.dirname(__file__), "..", "model_prep"))
 
@@ -84,11 +84,11 @@ if __name__ == "__main__":
         "https://www.137ventures.com/team/sarah-mitchell"
     ]
 
-    print("🚀 Starting bulk search...")
+    print("Starting bulk search...")
     client = DesyncClient()
     bulk_info = client.bulk_search(target_list=urls, extract_html=True)
 
-    print("⏳ Collecting results...")
+    print("Collecting results...")
     pages = client.collect_results(
         bulk_search_id=bulk_info["bulk_search_id"],
         target_links=urls,
@@ -98,25 +98,25 @@ if __name__ == "__main__":
     )
 
     if not pages:
-        print("❌ No results returned.")
+        print("No results returned.")
         exit()
 
-    print(f"✅ Retrieved {len(pages)} pages. Cleaning HTML...")
+    print(f"Retrieved {len(pages)} pages. Cleaning HTML...")
     remove_boilerplate_html(pages)
 
-    print("\n🧠 Chunking cleaned HTML into blocks...")
+    print("\nChunking cleaned HTML into blocks...")
     chunks = chunk_text_blocks(pages, method="paragraph", max_tokens=100)
 
-    print(f"📦 Generated {len(chunks)} chunks.")
+    print(f"Generated {len(chunks)} chunks.")
 
-    # ✂️ Load tokenizer and tokenize
-    print("\n🔍 Loading tokenizer...")
+    # Load tokenizer and tokenize
+    print("\nLoading tokenizer...")
     tokenizer = load_tokenizer("bert-base-uncased")
 
-    print("✂️ Tokenizing chunks...")
+    print("Tokenizing chunks...")
     texts = [chunk["text"] for chunk in chunks]
     encoded = tokenize_chunks(texts, tokenizer, max_length=100)
 
-    print("\n📦 Tokenized Output (sample):")
+    print("\nTokenized Output (sample):")
     print("input_ids:\n", encoded["input_ids"][:2])
     print("attention_mask:\n", encoded["attention_mask"][:2])

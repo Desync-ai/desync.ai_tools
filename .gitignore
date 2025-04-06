@@ -29,3 +29,10 @@ Thumbs.db
 # Ignore the output directory
 output/
 outputs/
+
+examples/train_and_run_transformer.py
+
+# Model stuff
+137_team_meta.jsonl
+137_team.faiss
+/examples/rag_137_team.py
