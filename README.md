@@ -44,6 +44,7 @@ DESYNC.AI_TOOLS/
 │
 ├── parsers/                      # General-purpose HTML and graph tools
 │   ├── html_parser.py
+│   ├── language_detector.py
 │   ├── link_graph.py
 │   └── text_stats.py
 │
