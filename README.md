@@ -31,7 +31,6 @@ DESYNC.AI_TOOLS/
 │   ├── extract_contacts.py
 │   └── named_entity_extractor.py
 │
-│
 ├── examples/                     # Example scripts
 │   └── bulk_clean_and_save_csv.py
 │
@@ -48,8 +47,10 @@ DESYNC.AI_TOOLS/
 │   └── text_stats.py
 │
 ├── result_cleaning/              # Cleaning and deduplication
-│   ├── html_cleaning/            # Remove <nav>, <footer>, <header> from HTML
-│   └── text_content_cleaning/    # Clean duplicate lines/blocks in .text_content
+│   ├── html_cleaning/
+│   │   └── remove_boilerplate_html.py
+│   └── text_content_cleaning/
+│       └── remove_boilerplate_text.py
 │
 ├── storage/                      # Save cleaned output
 │   ├── csv/
