@@ -6,13 +6,15 @@ An open-source toolkit for stealthy web data extraction, boilerplate cleaning, s
 
 ## 🔧 Features
 
-- **Crawling & Bulk Search**: Grab web data using `DesyncClient`, with support for stealthy headless scraping.
-- **Boilerplate Removal**: Strip repeated headers, footers, and navbars from raw HTML or `.text_content`.
-- **Contact Extraction** *(WIP)*: Find emails, phones, LinkedIns from raw text or HTML.
+- **Crawling & Bulk Search**: Grab web data using `DesyncClient`, with support for stealthy headful scraping.
+- **Boilerplate Removal**: Strip repeated pages, headers, footers, and navbars from raw HTML or `.text_content`.
+- **Data Extraction** *(WIP)*: Find emails, phones, LinkedIns, and named entities from raw text or HTML.
 - **Embedding Pipelines**: Chunk, tokenize, and run transformer inference (BERT, S-BERT).
 - **Link Graph Tools**: Construct internal/external page link graphs for sitemaps or network analysis.
 - **Text Stats + Heuristics**: Score content quality (word count, link ratio, etc.)
 - **Structured Output**: Store clean results in CSV, JSON, or SQLite.
+- **Sentiment Analysis and Summarisation**: Create a concise summary and sentiment analysis on the pages you scrape.
+- **Link Graph Generation**: Construct a graph on how the pages you scraped link to one another.
 
 ---
 
