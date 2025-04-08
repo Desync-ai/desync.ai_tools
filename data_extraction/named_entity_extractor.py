@@ -55,11 +55,7 @@ def extract_entities(page: PageData) -> Dict:
 
 # === Example Usage ===
 if __name__ == "__main__":
-    try:
-        from desync_search import DesyncClient
-    except ImportError:
-        print("Missing dependency: desync_search. Make sure you're in the Desync Tools repo or installed the package.")
-        exit(1)
+    from desync_search import DesyncClient
 
     print("Running bulk search...")
     urls = [
