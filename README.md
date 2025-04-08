@@ -28,7 +28,9 @@ DESYNC.AI_TOOLS/
 │   └── test_search.py
 │
 ├── data_extraction/              # Contact info extraction (email, phone, LinkedIn)
-│   └── extract_contacts.py
+│   ├── extract_contacts.py
+│   ├── named_entity_extractor.py
+│
 │
 ├── examples/                     # Example scripts
 │   └── bulk_clean_and_save_csv.py
