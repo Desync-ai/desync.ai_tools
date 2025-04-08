@@ -71,4 +71,4 @@ if __name__ == "__main__":
     output_path = "output/bulk_cleaned_output.csv"
     save_to_csv(pages, output_path, mode="w")
 
-    print(f"✅ Saved cleaned bulk search results to {output_path}")
+    print(f"Saved cleaned bulk search results to {output_path}")
