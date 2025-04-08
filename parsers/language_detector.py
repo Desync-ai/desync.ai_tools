@@ -1,3 +1,5 @@
+# parsers/language_detector.py
+
 """
 language_detector.py
 
