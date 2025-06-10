@@ -58,6 +58,7 @@ DESYNC.AI_TOOLS/
 │   │   ├── remove_boilerplate_prefix.py
 │   │   └── remove_boilerplate_suffix.py
 │   └── duplicate_page_remover.py
+│   └── filter_by_url_substring.py
 │
 ├── storage/                    # Save your search results
 │   ├── csv_storage.py
