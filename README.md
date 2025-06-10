@@ -23,49 +23,50 @@ An open-source toolkit for stealthy web data extraction, boilerplate cleaning, s
 ```
 DESYNC.AI_TOOLS/
 │
-├── basic_implementation/         # Core DesyncClient tools
+├── basic_implementation/       # Core DesyncClient tools
 │   ├── bulk_search.py
 │   ├── crawl_search.py
 │   ├── stealth_search.py
 │   └── test_search.py
 │
-├── data_extraction/              # Contact info extraction (email, phone, LinkedIn)
+├── data_extraction/            # Contact info extraction (email, phone, LinkedIn)
 │   ├── extract_contacts.py
 │   ├── text_summarization.py
 │   ├── sentiment_analyzer.py
 │   └── named_entity_extractor.py
 │
-├── examples/                     # Example scripts
+├── examples/                   # Example scripts
 │   └── bulk_clean_and_save_csv.py
 │
-├── model_prep/                   # Transformer-based modeling pipeline
+├── model_prep/                 # Transformer-based modeling pipeline
 │   ├── chunk_text_blocks.py
 │   ├── dataset_builder.py
 │   ├── tokenizer_loader.py
 │   ├── torch_loader.py
 │   └── transformer_runner.py
 │
-├── parsers/                      # General-purpose HTML and graph tools
+├── parsers/                    # General-purpose HTML and graph tools
 │   ├── html_parser.py
 │   ├── language_detector.py
 │   ├── link_graph.py
 │   └── text_stats.py
 │
-├── result_cleaning/              # Cleaning and deduplication
+├── result_cleaning/            # Cleaning and deduplication
 │   ├── html_cleaning/
 │   │   └── remove_boilerplate_html.py
 │   ├── text_content_cleaning/
-│   │    └── remove_boilerplate_text.py
+│   │   ├── remove_boilerplate_prefix.py # Changed
+│   │   └── remove_boilerplate_suffix.py # Changed
 │   └── duplicate_page_remover.py
 │
-├── storage/                      # Save your search results
+├── storage/                    # Save your search results
 │   ├── csv_storage.py
 │   ├── json_storage.py
 │   └── sqlite_storage.py
 │
-├── output/                       # Your saved outputs (ignored by git)
+├── output/                     # Your saved outputs (ignored by git)
 │
-├── .env                          # Credentials (not committed)
+├── .env                        # Credentials (not committed)
 ├── .gitignore
 └── README.md
 ```
