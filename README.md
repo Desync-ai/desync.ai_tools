@@ -58,13 +58,10 @@ DESYNC.AI_TOOLS/
 │   │    └── remove_boilerplate_text.py
 │   └── duplicate_page_remover.py
 │
-├── storage/                      # Save cleaned output
-│   ├── csv/
-│   │   └── csv_storage.py
-│   ├── json/
-│   │   └── json_storage.py
-│   └── sqlite/
-│       └── sqlite_storage.py
+├── storage/                      # Save your search results
+│   ├── csv_storage.py
+│   ├── json_storage.py
+│   └── sqlite_storage.py
 │
 ├── output/                       # Your saved outputs (ignored by git)
 │
@@ -81,6 +78,10 @@ DESYNC.AI_TOOLS/
 
 ```bash
 pip install desync_search
+```
+
+```bash
+pip install desync-data
 ```
 
 ### 2. Add your API key
