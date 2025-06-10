@@ -55,8 +55,8 @@ DESYNC.AI_TOOLS/
 │   ├── html_cleaning/
 │   │   └── remove_boilerplate_html.py
 │   ├── text_content_cleaning/
-│   │   ├── remove_boilerplate_prefix.py # Changed
-│   │   └── remove_boilerplate_suffix.py # Changed
+│   │   ├── remove_boilerplate_prefix.py
+│   │   └── remove_boilerplate_suffix.py
 │   └── duplicate_page_remover.py
 │
 ├── storage/                    # Save your search results

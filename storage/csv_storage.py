@@ -15,7 +15,7 @@ from desync_data import save_to_csv
 
 # Initialize the DesyncClient
 client = DesyncClient()
-# You can also initialize the client like this: client = DesyncClient(user_api_key="your_api_key_here")
+# client = DesyncClient(user_api_key="your_api_key_here") # Alternative initialization
 
 # Perform a crawl on 137ventures.com/team
 crawl_pages = client.crawl(start_url="https://www.137ventures.com/team", max_depth=1)
